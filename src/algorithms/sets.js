@@ -82,4 +82,46 @@ MySet.prototype.union = function(otherSet) {
     return unionSet.values();
 };
 
+/**
+ * Returns the intersection of two sets as a set
+ * @param Array otherSet
+ * @return Object intersectionSet
+ */
+MySet.prototype.intersection = function(otherSet) {
+    var intersectionSet = new MySet();
+    var firstSet = this.values();
+    firstSet.forEach(function(item) {
+        if (otherSet.indexOf(item) !== -1) intersectionSet.add(item);
+    });
+
+    return intersectionSet;
+};
+
+/**
+ * Returns the difference of two sets as a new set
+ * @param Array otherSet
+ * @return Object differenceSet
+ */
+MySet.prototype.difference = function(otherSet) {
+    var differenceSet = new MySet();
+    var firstSet = this.values();
+    firstSet.forEach(function(item) {
+        if (otherSet.indexOf(item) === -1) differenceSet.add(item);
+    });
+
+    return differenceSet;
+};
+
+/**
+ * Tests if the set is a subset of a different set
+ * @param Array otherSet
+ * @return Boolean
+ */
+MySet.prototype.subset = function(otherSet) {
+    var firstSet = this.values();
+    return firstSet.every(function(item) {
+        return otherSet.indexOf(item) != -1;
+    });
+};
+
 export default MySet;
